@@ -19,8 +19,9 @@ export const App = () => {
     <>
       <main>
         {isConfirmed ? (`Congratulation user ${user.email}`
-          ) : (
-        <RegisterForm onSubmit={confirmUserData} />)}
+        ) : (
+          <RegisterForm onSubmit={confirmUserData}/>
+        )}
       </main>
       <ConfirmationDialog
         title={"Please confirm registration"}
@@ -34,8 +35,8 @@ export const App = () => {
   )
 }
 
-const RegisterForm = ({ onSubmit }) => {
-  const [user, setUserData] = useState({ email: '', password: '' })
+const RegisterForm = ({onSubmit}) => {
+  const [user, setUserData] = useState({email: '', password: ''})
   const setUserEmail = (e) => {
     const email = e.target.value
     setUserData({...user, email})
@@ -48,7 +49,7 @@ const RegisterForm = ({ onSubmit }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    const { email, password } = user;
+    const {email, password} = user;
 
     if (!email.includes('@')) {
       return
@@ -90,16 +91,16 @@ const RegisterForm = ({ onSubmit }) => {
 }
 
 
-const ConfirmationDialog = ({ title, children, confirm, cancel, open }) => {
+const ConfirmationDialog = ({title, children, confirm, cancel, open}) => {
   return (
     <dialog open={open}>
       <div>{title}</div>
       <div>{children}</div>
       <div>
-        <button type={"button"} onClick={confirm} >
+        <button type={"button"} onClick={confirm}>
           Confirm
         </button>
-        <button type={"button"} onClick={cancel} >
+        <button type={"button"} onClick={cancel}>
           Cancel
         </button>
       </div>

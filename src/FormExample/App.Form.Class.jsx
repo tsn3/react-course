@@ -1,7 +1,7 @@
-import {Component, useState} from "react";
-import {AppInput} from "./AppInput.jsx";
+import {Component} from "react";
 import {ConfirmationDialog} from "./ConfirmationDialog.jsx";
 import {RegisterForm} from "./RegisterForm.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class App extends Component {
       isConfirmed: false
     };
   };
+
   confirmUserData = (data) => {
     this.setState({...this.state, user: data})
     this.setState({...this.state, confirmationOpen: true})
@@ -31,16 +32,20 @@ class App extends Component {
         <main>
           {this.state.isConfirmed ? (`Congratulation user ${this.state.user.email}`
           ) : (
-            <RegisterForm onSubmit={this.confirmUserData} />)}
+            <RegisterForm onSubmit={this.confirmUserData}/>
+          )}
+
         </main>
-        <ConfirmationDialog
-          title={"Please confirm registration"}
-          cancel={this.state.closeDialog}
-          open={this.state.confirmationOpen}
-          confirm={this.confirm}
-        >
-          <p>Please confirm your email: {this.state.user.email}</p>
-        </ConfirmationDialog>
+        <ErrorBoundary>
+          <ConfirmationDialog
+            title={"Please confirm registration"}
+            cancel={this.state.closeDialog}
+            open={this.state.confirmationOpen}
+            confirm={this.confirm}
+          >
+            <p>Please confirm your email: {this.state.user.email}</p>
+          </ConfirmationDialog>
+        </ErrorBoundary>
       </>
     )
   }
