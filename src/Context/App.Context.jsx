@@ -4,7 +4,8 @@ const emptyUser = {
   userName: '',
   age: 0,
   email: '',
-  isConfirmed: false
+  isConfirmed: false,
+  confirmUserAccount: () => {},
 }
 
 const UserContex = createContext(emptyUser)
@@ -14,7 +15,6 @@ const userData = {
   age: 42,
   email: 'my-email@gmail.com',
   isConfirmed: false,
-  confirmUserAccount: () => {},
 }
 
 export default function App() {
