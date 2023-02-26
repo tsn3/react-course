@@ -1,14 +1,5 @@
-import {createContext, useContext, useEffect, useState} from "react";
-
-const emptyUser = {
-  userName: '',
-  age: 0,
-  email: '',
-  isConfirmed: false,
-  confirmUserAccount: () => {},
-}
-
-const UserContex = createContext(emptyUser)
+import {useEffect, useState} from "react";
+import {UserContext, useUserData } from './user-contex'
 
 const userData = {
   userName: 'Serhii',
@@ -26,9 +17,9 @@ export default function App() {
   return (
     <div className="component-1 component">
       {user ? (
-        <UserContex.Provider value={{...user, confirmUserAccount}}>
+        <UserContext.Provider value={{...user, confirmUserAccount}}>
           <Main />
-        </UserContex.Provider>
+        </UserContext.Provider>
       ) : (
         'loading'
       )}
@@ -45,7 +36,7 @@ const Main = () => {
 }
 
 const UserCard = () => {
-  const {userName, isConfirmed} = useContext(UserContex)
+  const {userName, isConfirmed} = useUserData()
   return (
     <div className="component-3 component">
       <h1>
@@ -57,7 +48,7 @@ const UserCard = () => {
 }
 
 const UserInfo = () => {
-  const {age, email,userName, isConfirmed, confirmUserAccount} = useContext(UserContex)
+  const {age, email,userName, isConfirmed, confirmUserAccount} = useUserData()
   return (
     <div className="component-4 component">
       <p>Name: {userName}</p>
